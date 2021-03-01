@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import styled from 'styled-components'
+import AddExercise from './AddExercise';
 
 const Container = styled.div `
     margin: 0.75rem 0 .25rem;
@@ -16,12 +18,13 @@ const HistoryHeader = styled.div`
     }
 
     button {
-        padding: .5rem .75rem;
+        padding: .125rem .6rem;
         border: 0;
         // background: linear-gradient(to top right, #4682b4, #68b6f5);
         background: #6a6a6a;
         color: #fff;
         border-radius: 2px;
+        font-size: 1.45rem;
     }
 `
 
@@ -38,7 +41,7 @@ const ListItem = styled.li`
     padding: 0.85rem 0 0.85rem 2%;
     // border-top: 2px solid rgb(230,230,230);
 
-    &:nth-child(odd){
+    &:nth-child(even){
         background-color: rgb(240,240,240);
     }
 
@@ -59,10 +62,14 @@ const ListItem = styled.li`
 `
 
 
-const ExerciseDetails = ({ exercise }) => {
+const ExerciseDetails = ({ exercise, addSession }) => {
     
-    const addExercise = (id) => {
-        console.log("ADD ID = ", id);
+    const [ToggleAdd, setToggleAdd] = useState(false)
+
+    const toggleAddExercise = (id) => {
+        console.log("TOGGLE ADD ID = ", id);
+
+        setToggleAdd(!ToggleAdd)
     }
 
 
@@ -73,10 +80,18 @@ const ExerciseDetails = ({ exercise }) => {
             <Container>
                 <HistoryHeader>
                     <h3>Previous Sessions</h3>
-                    <button type="button" onClick={() => addExercise(exercise.id)}>Add Session</button>
+                    <button type="button" onClick={() => toggleAddExercise(exercise.id)}>{ToggleAdd ? `x` : '+'}</button>
                 </HistoryHeader>
+                {ToggleAdd && <AddExercise addSession={addSession} exercise={exercise} />}
                 <HistoryList>
-                    {excerciseHistory.slice(0, 5).map((exercise, index) => (
+                    {/* {excerciseHistory.slice(0, 6).map((exercise, index) => (
+                        <ListItem key={index}>
+                            <span className="name">{exercise.date}</span>
+                            <span className="method">{exercise.reps}&times;{exercise.sets}</span>
+                            <span className="weight">{exercise.weight}{exercise.metric}</span>
+                        </ListItem>
+                    ))} */}
+                    {exercise.history.slice(0, 6).map((exercise, index) => (
                         <ListItem key={index}>
                             <span className="name">{exercise.date}</span>
                             <span className="method">{exercise.reps}&times;{exercise.sets}</span>

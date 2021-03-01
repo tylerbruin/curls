@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  border: 0;
 }
 
 body {
@@ -11,12 +12,12 @@ body {
   background-color: rgb(235, 235, 235);
   background-repeat: no-repeat;
   background-position: cover;
+  min-width: 320px;
 }
 
 main {
   min-height: 80vh;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem .75rem;
-
+  padding: 1rem .45rem;
 }

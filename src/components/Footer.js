@@ -9,7 +9,7 @@ const Foot = styled.footer`
 
 const Footer = () => {
     return (
-        <Foot className="footer">
+        <Foot>
             <p>Footer &copy; 2021</p>
         </Foot>
     )
