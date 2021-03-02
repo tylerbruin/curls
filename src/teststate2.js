@@ -4,14 +4,14 @@ const testData2 = [{
     metric: "kg",
     history: [{
         date: "2021-03-01",
-        sets: 3,
-        reps: 12,
-        weight: 10,
+        sets: "3",
+        reps: "12",
+        weight: "10",
     },{
         date: "2020-10-01",
-        sets: 5,
-        reps: 5,
-        weight: 100,
+        sets: "5",
+        reps: "5",
+        weight: "100",
     }]
 },{
     id: 2,
@@ -19,9 +19,9 @@ const testData2 = [{
     metric: "kg",
     history: [{
         date: "2019-03-01",
-        sets: 3,
-        reps: 3,
-        weight: 100,
+        sets: "3",
+        reps: "3",
+        weight: "100",
     }]
 }]
 

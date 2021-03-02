@@ -25,8 +25,8 @@ const Form = styled.form`
             margin-bottom: 0.35rem;
             border: 1px solid #6a6a6a;
 
-            &#sets, &#reps {
-                width: 24%;
+            &#sets, &#reps, &#weight {
+                width: 33%;
             }
         }
     }
@@ -107,23 +107,22 @@ const AddExercise = ({ addSession, exercise }) => {
     currentDate = currentDate.toISOString().substr(0,10);
 
     const [ExerciseDate, setExerciseDate] = useState(currentDate)
-    const [ExerciseSets, setExerciseSets] = useState()
-    const [ExerciseReps, setExerciseReps] = useState()
-    const [ExerciseWeight, setExerciseWeight] = useState()
+    const [ExerciseSets, setExerciseSets] = useState("")
+    const [ExerciseReps, setExerciseReps] = useState("")
+    const [ExerciseWeight, setExerciseWeight] = useState("")
 
     const clearForm = () => {
         setExerciseDate(currentDate)
-        setExerciseSets(null)
-        setExerciseReps(null)
-        setExerciseWeight(null)
+        setExerciseSets("")
+        setExerciseReps("")
+        setExerciseWeight("")
     }
 
     const submitExercise = (e) => {
         e.preventDefault();
-        console.log("Submit");
 
         let id = exercise.id;
-        let session = {
+        var session = {
             date: ExerciseDate,
             sets: ExerciseSets,
             reps: ExerciseReps,
@@ -132,7 +131,6 @@ const AddExercise = ({ addSession, exercise }) => {
 
         addSession(id, session)
         clearForm()
-
     }
 
     return (
@@ -154,9 +152,9 @@ const AddExercise = ({ addSession, exercise }) => {
 }
 
 AddExercise.propTypes = {
-    ExerciseSets: PropTypes.number,
-    ExerciseReps: PropTypes.number,
-    ExerciseWeight: PropTypes.number,
+    // ExerciseSets: PropTypes.number,
+    // ExerciseReps: PropTypes.number,
+    // ExerciseWeight: PropTypes.number,
 }
 
 

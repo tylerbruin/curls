@@ -60,7 +60,6 @@ const Exercises = ({ exercise, addSession }) => {
     
     const [ToggleDetails, setToggleState] = useState(false)
 
-    
     return (
         <>
             <ListItem >

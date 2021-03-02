@@ -34,6 +34,9 @@ const ListHeader = styled.div`
 
 
 const Exercises = ({exercises, addSession}) => {
+
+    console.log("Exercises = ", exercises);
+
     return (
         <List>
             <ListHeader>
@@ -41,7 +44,7 @@ const Exercises = ({exercises, addSession}) => {
                 <span className="sets">Sets</span>
                 <span className="weight">Weight</span>
             </ListHeader>
-            {!exercises.length && <li><p>No records found</p></li>}
+            {exercises.length === 0 && <li><p>No records found</p></li>}
             {exercises.map((exercise) => (
                 <Exercise key={exercise.id} exercise={exercise} addSession={addSession} />
             ))}

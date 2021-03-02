@@ -66,9 +66,7 @@ const ExerciseDetails = ({ exercise, addSession }) => {
     
     const [ToggleAdd, setToggleAdd] = useState(false)
 
-    const toggleAddExercise = (id) => {
-        console.log("TOGGLE ADD ID = ", id);
-
+    const toggleAddExercise = () => {
         setToggleAdd(!ToggleAdd)
     }
 
