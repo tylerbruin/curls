@@ -57,6 +57,7 @@ const ItemHeader = styled.button`
 `
 
 const Exercises = ({ exercise, addSession }) => {
+    console.log("Rendering Exercise : ", exercise.name);
     
     const [ToggleDetails, setToggleState] = useState(false)
 

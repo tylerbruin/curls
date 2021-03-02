@@ -8,6 +8,7 @@ import testData2 from './teststate2'
 
 function App() {
   const [ExerciseData, setExerciseData] = useState([])
+
   // const [Settings, setSettings] = useState({
   //   dateFormat: "number",
   // })
@@ -41,8 +42,7 @@ function App() {
   
     // Close ExerciseData, Find index of Exercise and Add Session to Exercise
     let exerciseIndex = ExerciseData.findIndex(ex => ex.id === id)
-    let newExerciseData = ExerciseData[exerciseIndex]
-
+    // let newExerciseData = ExerciseData[exerciseIndex]
     // newExerciseData = newExerciseData.push(session)
     
     // Sort Sessions by date
@@ -51,11 +51,17 @@ function App() {
     // });
     
     setExerciseData(prevState => {
-      console.log("prev = ", prevState)
-      return [...prevState, newExerciseData.history]
+      var newState = ExerciseData[exerciseIndex]
+      newState.history.push(session)
+
+      newState.history.sort(function(a,b){
+          return new Date(b.date) - new Date(a.date);
+        });
+
+      return [...prevState]
     });
 
-    // saveState()
+    saveState()
   }
 
   useEffect(() => {
