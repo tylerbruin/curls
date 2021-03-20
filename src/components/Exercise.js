@@ -61,14 +61,20 @@ const Exercises = ({ exercise, addSession }) => {
     
     const [ToggleDetails, setToggleState] = useState(false)
 
+    // Handle Printed Text if no values found
+    let nameText = exercise.name;
+    let repsSetsText = exercise.history[0]?.reps ? exercise.history[0].reps + "x" + exercise.history[0].reps : "N/A";
+    let weightText = exercise.history[0]?.weight ? exercise.history[0]?.weight + exercise.metric : "N/A"
+    
+
     return (
         <>
             <ListItem >
                 <ItemHeader className={ToggleDetails && "active"} 
                 onClick={() => setToggleState(!ToggleDetails)}>
-                    <span className="name">{exercise.name}</span>
-                    <span className="method">{exercise.history[0].reps}&times;{exercise.history[0].sets}</span>
-                    <span className="weight">{exercise.history[0].weight}{exercise.metric}</span>
+                    <span className="name">{nameText}</span>
+                    <span className="method">{repsSetsText}</span>
+                    <span className="weight">{weightText}</span>
                 </ItemHeader>
                 {ToggleDetails && <ExerciseDetails exercise={exercise} addSession={addSession} />}
             </ListItem>

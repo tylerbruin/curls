@@ -100,7 +100,7 @@ const SubmitButton = styled.button`
 
 
 
-const AddExercise = ({ addSession, exercise }) => {
+const AddSession = ({ addSession, exercise }) => {
 
     // Set Date Input to current Time
     var currentDate = new Date();
@@ -137,10 +137,10 @@ const AddExercise = ({ addSession, exercise }) => {
         <Form onSubmit={submitExercise}>
             <h3>Add Session</h3>
             <fieldset>
-                <input id="sets" name="sets" type="number" placeholder="Sets" value={ExerciseSets} onChange={(e) => setExerciseSets(e.target.value)} required />
-                <input id="reps" name="reps" type="number" placeholder="Reps" value={ExerciseReps} onChange={(e) => setExerciseReps(e.target.value)} required />
-                <input id="weight" name="weight" type="number" placeholder="Weight" value={ExerciseWeight} onChange={(e) => setExerciseWeight(e.target.value)} required />
-                <input id="date" name="date" type="date" value={ExerciseDate} onChange={(e) => setExerciseDate(e.target.value)} required/>
+                <input id="sets" name="sets" autoComplete="off" type="number" placeholder="Sets" value={ExerciseSets} onChange={(e) => setExerciseSets(e.target.value)} required />
+                <input id="reps" name="reps" autoComplete="off" type="number" placeholder="Reps" value={ExerciseReps} onChange={(e) => setExerciseReps(e.target.value)} required />
+                <input id="weight" name="weight" autoComplete="off" type="number" placeholder="Weight" value={ExerciseWeight} onChange={(e) => setExerciseWeight(e.target.value)} required />
+                <input id="date" name="date" autoComplete="off" type="date" value={ExerciseDate} onChange={(e) => setExerciseDate(e.target.value)} required/>
                 {/* <MetricCheckbox>
                     <input id="metric" name="metric" type="checkbox" value={ExerciseMetric} onChange={(e) => setExerciseMetric(e.target.checked)} />
                     <span className="radio"></span>
@@ -151,14 +151,5 @@ const AddExercise = ({ addSession, exercise }) => {
     )
 }
 
-AddExercise.propTypes = {
-    // ExerciseSets: PropTypes.number,
-    // ExerciseReps: PropTypes.number,
-    // ExerciseWeight: PropTypes.number,
-}
 
-
-export default AddExercise
-
-// ExerciseMetric: PropTypes.bool,
-// onChange={(e) => setExerciseMetric(e.target.checked)}
+export default AddSession

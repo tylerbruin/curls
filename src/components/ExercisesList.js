@@ -3,6 +3,7 @@ import Exercise from './Exercise'
 
 const List = styled.ul`
     list-style-type: none;
+    overflow: scroll;
 `
 
 const ListHeader = styled.div`
@@ -31,7 +32,10 @@ const ListHeader = styled.div`
         }
     }
 `
-
+const NoResults = styled.li`
+    text-align: center;
+    padding: 1rem;
+`
 
 const Exercises = ({exercises, addSession}) => {
 
@@ -44,7 +48,7 @@ const Exercises = ({exercises, addSession}) => {
                 <span className="sets">Sets</span>
                 <span className="weight">Weight</span>
             </ListHeader>
-            {exercises.length === 0 && <li><p>No records found</p></li>}
+            {exercises.length === 0 && <NoResults><p>No exercise data found</p></NoResults>}
             {exercises.map((exercise) => (
                 <Exercise key={exercise.id} exercise={exercise} addSession={addSession} />
             ))}

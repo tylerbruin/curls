@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import AddExercise from './AddExercise';
+import AddSession from './AddSession';
 
 const Container = styled.div `
     margin: 0.75rem 0 .25rem;
@@ -80,7 +80,7 @@ const ExerciseDetails = ({ exercise, addSession }) => {
                     <h3>Previous Sessions</h3>
                     <button type="button" onClick={() => toggleAddExercise(exercise.id)}>{ToggleAdd ? `x` : '+'}</button>
                 </HistoryHeader>
-                {ToggleAdd && <AddExercise addSession={addSession} exercise={exercise} />}
+                {ToggleAdd && <AddSession addSession={addSession} exercise={exercise} />}
                 <HistoryList>
                     {/* {excerciseHistory.slice(0, 6).map((exercise, index) => (
                         <ListItem key={index}>
