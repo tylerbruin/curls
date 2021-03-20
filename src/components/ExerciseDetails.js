@@ -82,18 +82,11 @@ const ExerciseDetails = ({ exercise, addSession }) => {
                 </HistoryHeader>
                 {ToggleAdd && <AddSession addSession={addSession} exercise={exercise} />}
                 <HistoryList>
-                    {/* {excerciseHistory.slice(0, 6).map((exercise, index) => (
-                        <ListItem key={index}>
-                            <span className="name">{exercise.date}</span>
-                            <span className="method">{exercise.reps}&times;{exercise.sets}</span>
-                            <span className="weight">{exercise.weight}{exercise.metric}</span>
-                        </ListItem>
-                    ))} */}
-                    {exercise.history.slice(0, 6).map((exercise, index) => (
-                        <ListItem key={index}>
-                            <span className="name">{exercise.date}</span>
-                            <span className="method">{exercise.reps}&times;{exercise.sets}</span>
-                            <span className="weight">{exercise.weight}{exercise.metric}</span>
+                    {exercise.history.slice(0, 6).map((session, index) => (
+                        <ListItem key={session.id}>
+                            <span className="name">{session.date}</span>
+                            <span className="method">{session.reps}&times;{session.sets}</span>
+                            <span className="weight">{session.weight}kg</span>
                         </ListItem>
                     ))}
                 </HistoryList>

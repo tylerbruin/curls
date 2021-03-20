@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 const Foot = styled.footer`
-    padding: 1rem;
-    background-color: #6a6a6a;
+    padding: .75rem;
+    background-color: rgb(169 169 169);
     color: #fff;
     text-align: center;
 `
@@ -10,7 +10,7 @@ const Foot = styled.footer`
 const Footer = () => {
     return (
         <Foot>
-            <p>Footer &copy; 2021</p>
+            <p>&copy; tbruin 2021</p>
         </Foot>
     )
 }

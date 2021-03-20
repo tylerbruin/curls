@@ -3,24 +3,36 @@ import { useState } from 'react'
 
 const CreateForm = styled.form`
     display: flex;
-    flex-direction: column;
-    background-color: #cbd8e3;
-    margin: .5rem;
-    padding: .5rem;
+    flex: 1;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    // background-color: #cbd8e3;
+    padding: 1rem;
 
     label {
+        width: 100%;
         text-align: center;
-        // opacity: 0;
-        // visibility: hidden;
-    }
+        padding: 0.5rem;
 
+        opacity: 0;
+        visibility: hidden;
+    }
 `
+
 const CreateInput = styled.input`
     height: 50px;
-    flex: 1 1 auto;
-    box-shadow: 0 0 5px 0 rgb(0 0 0 / 10%);
+    // box-shadow: 0 0 5px 0 rgb(0 0 0 / 10%);
     text-align: center;
     font-size: 1.125rem;
+    flex: 1 1 auto;
+`
+const SubmitBtn = styled.button`
+    padding: 0.1rem 0.5rem;
+    min-width: 50px;
+    font-size: 2rem;
+    color: #fff;
+    background: linear-gradient(to top right, #4682b4, #68b6f5);
 `
 
 
@@ -55,7 +67,8 @@ const CreateExercise = ({createFunction}) => {
     return (
         <CreateForm onSubmit={submitCreateExercise} >
             <label htmlFor="create">Create/Add Exercise</label>
-            <CreateInput id="create" autoComplete="off" placeholder="e.g Curls or Curls 12 3 35" value={ExName} onChange={(e) => setExName(e.target.value)} />
+            <CreateInput id="create" autoComplete="off" placeholder="e.g Curls or Curls 12 3 35" required value={ExName} onChange={(e) => setExName(e.target.value)} />
+            <SubmitBtn type="submit" aria-label="Add Exercise">+</SubmitBtn>
         </CreateForm>
     )
 }

@@ -47,7 +47,7 @@ function App() {
 
   // Stateful Actions
   const createExercise = (name, reps, sets, weight) => {
-    console.log("stuff = ", name + reps + sets + weight);
+    // console.log("stuff = ", name + reps + sets + weight);
 
     let newExercise = {};
     let currentDate = new Date();
@@ -61,6 +61,7 @@ function App() {
         name: name,
         metric: "kg",
         history: [{
+			id: Date.now() * 2,
             date: currentDate,
             sets: sets,
             reps: reps,
@@ -94,8 +95,13 @@ function App() {
   }
 
 
-  const deleteExercise = () => {}
-  const deleteSession = () => {}
+  const deleteExercise = (id) => {
+	  setExerciseData(ExerciseData => ExerciseData.filter(exercise => exercise.id !== id));
+  }
+
+  const deleteSession = (id) => {
+	
+  }
 
   const addSession = (id, session) => {
     console.log("Adding Session to", id, session);

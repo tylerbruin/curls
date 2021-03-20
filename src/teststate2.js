@@ -3,11 +3,13 @@ const testData2 = [{
     name: "Curls",
     metric: "kg",
     history: [{
+        id: 987312,
         date: "2021-03-01",
         sets: "3",
         reps: "12",
         weight: "10",
     },{
+        id: 123751239,
         date: "2020-10-01",
         sets: "5",
         reps: "5",
@@ -18,6 +20,7 @@ const testData2 = [{
     name: "Romanian deadlift",
     metric: "kg",
     history: [{
+        id: 12341123,
         date: "2019-03-01",
         sets: "3",
         reps: "3",

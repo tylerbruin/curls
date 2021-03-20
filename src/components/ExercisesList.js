@@ -1,9 +1,27 @@
 import styled from 'styled-components'
 import Exercise from './Exercise'
 
+const ListWrapper = styled.div`
+    position: relative;
+    overflow: hidden;
+    height: 70vh;
+
+    &:after {
+        content: "";
+        pointer-events: none;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 30px;
+        background: linear-gradient(0deg, rgb(235, 235, 235), transparent);
+    }
+`
+
 const List = styled.ul`
     list-style-type: none;
-    overflow: scroll;
+    height: 100%;
+    overflow-y: scroll;
+    padding: 1rem .45rem;
 `
 
 const ListHeader = styled.div`
@@ -42,17 +60,19 @@ const Exercises = ({exercises, addSession}) => {
     console.log("Exercises = ", exercises);
 
     return (
-        <List>
-            <ListHeader>
-                <span className="name">Exercise</span>
-                <span className="sets">Sets</span>
-                <span className="weight">Weight</span>
-            </ListHeader>
-            {exercises.length === 0 && <NoResults><p>No exercise data found</p></NoResults>}
-            {exercises.map((exercise) => (
-                <Exercise key={exercise.id} exercise={exercise} addSession={addSession} />
-            ))}
-        </List>
+        <ListWrapper>
+            <List>
+                <ListHeader>
+                    <span className="name">Exercise</span>
+                    <span className="sets">Sets</span>
+                    <span className="weight">Weight</span>
+                </ListHeader>
+                {exercises.length === 0 && <NoResults><p>No exercise data found</p></NoResults>}
+                {exercises.map((exercise) => (
+                    <Exercise key={exercise.id} exercise={exercise} addSession={addSession} />
+                ))}
+            </List>
+        </ListWrapper>
     )
 }
 

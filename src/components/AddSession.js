@@ -123,6 +123,7 @@ const AddSession = ({ addSession, exercise }) => {
 
         let id = exercise.id;
         var session = {
+            id: Date.now() * 2,
             date: ExerciseDate,
             sets: ExerciseSets,
             reps: ExerciseReps,
