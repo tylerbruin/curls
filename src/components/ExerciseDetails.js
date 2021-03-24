@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import styled from 'styled-components'
 import AddSession from './AddSession';
+import useDoubleClick from 'use-double-click';
 
 const Container = styled.div `
-    margin: 0.75rem 0 .25rem;
-    padding: 0.75rem 0.75rem 0.75rem;
+    margin: 0.25rem 0 .25rem;
+    padding: 0.5rem 0.85rem;
 `
 
 const HistoryHeader = styled.div`
@@ -61,30 +62,50 @@ const ListItem = styled.li`
     
 `
 
-
-const ExerciseDetails = ({ exercise, addSession }) => {
+const ExerciseDetails = ({ exercise, addSession, deleteFunc }) => {
     
     const [ToggleAdd, setToggleAdd] = useState(false)
+    const dbClickRef = useRef();
 
-    const toggleAddExercise = () => {
-        setToggleAdd(!ToggleAdd)
-    }
+    // Allow for Single and Double Clicks
+    useDoubleClick({
+        onSingleClick: e => {
+            return;
+        },
+        onDoubleClick: e => {
+            // Identify Session ID
+            let targetEl = e.target;
+            let targetID = targetEl.dataset.id || targetEl.closest('[data-id]')?.dataset.id;
 
+            // If a Session ID has been found, proceed to prompt user to delete session
+            if (targetID) {
+                if(window.confirm(`Delete this session from history?`)) {
+                    let type = "session";
+                    deleteFunc(type, exercise.id, targetID)
+                }
+            }
+            
+        },
+        ref: dbClickRef,
+        latency: 225
+    });
 
-    const excerciseHistory = exercise.history;
+    // const clickHandler = (id) => {
+    //     console.log("I have been clicked", id);
+    // }
 
     return (
         <>
             <Container>
                 <HistoryHeader>
                     <h3>Previous Sessions</h3>
-                    <button type="button" onClick={() => toggleAddExercise(exercise.id)}>{ToggleAdd ? `x` : '+'}</button>
+                    <button type="button" onClick={() => setToggleAdd(!ToggleAdd)} >{ToggleAdd ? `x` : '+'}</button>
                 </HistoryHeader>
                 {ToggleAdd && <AddSession addSession={addSession} exercise={exercise} />}
-                <HistoryList>
-                    {exercise.history.slice(0, 6).map((session, index) => (
-                        <ListItem key={session.id}>
-                            <span className="name">{session.date}</span>
+                <HistoryList ref={dbClickRef} >
+                    {exercise.history.slice(0, 6).map((session) => (
+                        <ListItem key={session.id} data-id={session.id} >
+                            <span className="name" >{session.date}</span>
                             <span className="method">{session.reps}&times;{session.sets}</span>
                             <span className="weight">{session.weight}kg</span>
                         </ListItem>

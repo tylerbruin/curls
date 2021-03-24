@@ -13,18 +13,18 @@ const ListWrapper = styled.div`
         bottom: 0;
         width: 100%;
         height: 30px;
-        background: linear-gradient(0deg, rgb(235, 235, 235), transparent);
+        // background: linear-gradient(0deg, rgb(235, 235, 235), transparent);
     }
 `
 
 const List = styled.ul`
     list-style-type: none;
     height: 100%;
-    overflow-y: scroll;
+    // overflow-y: scroll;
     padding: 1rem .45rem;
 `
 
-const ListHeader = styled.div`
+const ListHeader = styled.li`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -32,7 +32,7 @@ const ListHeader = styled.div`
     background: linear-gradient(to top right, #4682b4, #68b6f5);
     color: #fff;
     border: 0;
-    padding: 1.125rem 0.75rem;
+    padding: 0.75rem 0.75rem;
     margin-bottom: 0.35rem;
     cursor: auto;
 
@@ -55,9 +55,9 @@ const NoResults = styled.li`
     padding: 1rem;
 `
 
-const Exercises = ({exercises, addSession}) => {
+const Exercises = ({exercises, addSession, deleteFunc}) => {
 
-    console.log("Exercises = ", exercises);
+    // console.log("Exercises = ", exercises);
 
     return (
         <ListWrapper>
@@ -69,7 +69,7 @@ const Exercises = ({exercises, addSession}) => {
                 </ListHeader>
                 {exercises.length === 0 && <NoResults><p>No exercise data found</p></NoResults>}
                 {exercises.map((exercise) => (
-                    <Exercise key={exercise.id} exercise={exercise} addSession={addSession} />
+                    <Exercise key={exercise.id} exercise={exercise} addSession={addSession} deleteFunc={deleteFunc} />
                 ))}
             </List>
         </ListWrapper>

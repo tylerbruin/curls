@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import ExerciseDetails from './ExerciseDetails'
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import useDoubleClick from 'use-double-click';
+
 
 const ListItem = styled.li`
 
@@ -15,7 +17,7 @@ const ItemHeader = styled.button`
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    padding: 1rem 0.75rem;
+    padding: 0.75rem 0.75rem;
     background-color: #fff;
     position: relative;
     cursor: pointer;
@@ -33,7 +35,7 @@ const ItemHeader = styled.button`
     }
     
     &.active {
-        margin: 1.25rem 0;
+        margin: .75rem 0;
 
         :after {
             width: calc(100% - 1.5rem);
@@ -56,27 +58,46 @@ const ItemHeader = styled.button`
     }
 `
 
-const Exercises = ({ exercise, addSession }) => {
-    console.log("Rendering Exercise : ", exercise.name);
+const Exercises = ({ exercise, addSession, deleteFunc }) => {
+    // console.log("Rendering Exercise : ", exercise.name);
     
-    const [ToggleDetails, setToggleState] = useState(false)
+    const [ToggleDetails, setToggleState] = useState(false);
+    const dbClickRef = useRef();
+
+    // Allow for Single and Double Clicks
+    useDoubleClick({
+        onSingleClick: e => {
+            // console.log(e, 'single click');
+            setToggleState(!ToggleDetails);
+        },
+        onDoubleClick: e => {
+            // console.log(e, 'double click');
+            if(window.confirm(`Delete '${exercise.name}' from exercise list?`)) {
+                let type = "exercise";
+                deleteFunc(type, exercise.id)
+            }
+        },
+        ref: dbClickRef,
+        latency: 225
+    });
+    
+
+
 
     // Handle Printed Text if no values found
     let nameText = exercise.name;
-    let repsSetsText = exercise.history[0]?.reps ? exercise.history[0].reps + "x" + exercise.history[0].reps : "N/A";
-    let weightText = exercise.history[0]?.weight ? exercise.history[0]?.weight + exercise.metric : "N/A"
-    
+    let repsSetsText = exercise.history[0]?.reps ? exercise.history[0].reps + "x" + exercise.history[0].sets : "N/A";
+    let weightText = exercise.history[0]?.weight ? exercise.history[0].weight + exercise.metric : "N/A"
 
     return (
         <>
-            <ListItem >
-                <ItemHeader className={ToggleDetails && "active"} 
-                onClick={() => setToggleState(!ToggleDetails)}>
+            <ListItem>
+                <ItemHeader className={ToggleDetails && "active"} ref={dbClickRef}>
                     <span className="name">{nameText}</span>
                     <span className="method">{repsSetsText}</span>
                     <span className="weight">{weightText}</span>
                 </ItemHeader>
-                {ToggleDetails && <ExerciseDetails exercise={exercise} addSession={addSession} />}
+                {ToggleDetails && <ExerciseDetails exercise={exercise} addSession={addSession} deleteFunc={deleteFunc} />}
             </ListItem>
         </>
     )

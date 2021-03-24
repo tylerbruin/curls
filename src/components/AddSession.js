@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types';
 
 
 const Form = styled.form`
@@ -33,61 +32,61 @@ const Form = styled.form`
    
 `
 
-const MetricCheckbox = styled.label`
-    display: flex;
-    align-items:center;
+// const MetricCheckbox = styled.label`
+//     display: flex;
+//     align-items:center;
 
-    input {
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
-        height: 0;
-        width: 0;
-    }
+//     input {
+//         position: absolute;
+//         opacity: 0;
+//         cursor: pointer;
+//         height: 0;
+//         width: 0;
+//     }
 
-    .radio {
-        display: flex;
-        align-items: center;
-        position: relative;
-        height: 1.875rem;
-        width: 3.5rem;
-        // border: 2px solid #4682b4;
-        // background-color: #4682b4;
-        border: 2px solid #6a6a6a;
-        background-color: #6a6a6a;
-        box-sizing: content-box;
-        border-radius: 20px;
-        transition: all 0.25s;
-        // background: linear-gradient(to top right, #4682b4, #68b6f5);
+//     .radio {
+//         display: flex;
+//         align-items: center;
+//         position: relative;
+//         height: 1.875rem;
+//         width: 3.5rem;
+//         // border: 2px solid #4682b4;
+//         // background-color: #4682b4;
+//         border: 2px solid #6a6a6a;
+//         background-color: #6a6a6a;
+//         box-sizing: content-box;
+//         border-radius: 20px;
+//         transition: all 0.25s;
+//         // background: linear-gradient(to top right, #4682b4, #68b6f5);
 
-        :after {
-            content: "kg";
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 0.875rem;
-            background-color: #fff;
-            border-radius: 20px;
-            width: 1.5rem;
-            height: 1.5rem;
-            padding: 0.125rem;
+//         :after {
+//             content: "kg";
+//             display: flex;
+//             justify-content: center;
+//             align-items: center;
+//             font-size: 0.875rem;
+//             background-color: #fff;
+//             border-radius: 20px;
+//             width: 1.5rem;
+//             height: 1.5rem;
+//             padding: 0.125rem;
 
-            margin-left: 0%;
-            transform: translateX(0%);
-            transition: all 0.2s;
-        }
+//             margin-left: 0%;
+//             transform: translateX(0%);
+//             transition: all 0.2s;
+//         }
 
-    }
+//     }
 
-    input:checked ~ .radio {
+//     input:checked ~ .radio {
 
-        &:after {
-            content: "lbs";
-            margin-left: 50%;
-        }
-    }
+//         &:after {
+//             content: "lbs";
+//             margin-left: 50%;
+//         }
+//     }
 
-`
+// `
 
 const SubmitButton = styled.button`
     display: block;
@@ -138,8 +137,8 @@ const AddSession = ({ addSession, exercise }) => {
         <Form onSubmit={submitExercise}>
             <h3>Add Session</h3>
             <fieldset>
-                <input id="sets" name="sets" autoComplete="off" type="number" placeholder="Sets" value={ExerciseSets} onChange={(e) => setExerciseSets(e.target.value)} required />
                 <input id="reps" name="reps" autoComplete="off" type="number" placeholder="Reps" value={ExerciseReps} onChange={(e) => setExerciseReps(e.target.value)} required />
+                <input id="sets" name="sets" autoComplete="off" type="number" placeholder="Sets" value={ExerciseSets} onChange={(e) => setExerciseSets(e.target.value)} required />
                 <input id="weight" name="weight" autoComplete="off" type="number" placeholder="Weight" value={ExerciseWeight} onChange={(e) => setExerciseWeight(e.target.value)} required />
                 <input id="date" name="date" autoComplete="off" type="date" value={ExerciseDate} onChange={(e) => setExerciseDate(e.target.value)} required/>
                 {/* <MetricCheckbox>

@@ -26,6 +26,7 @@ const CreateInput = styled.input`
     text-align: center;
     font-size: 1.125rem;
     flex: 1 1 auto;
+    border-radius: 0;
 `
 const SubmitBtn = styled.button`
     padding: 0.1rem 0.5rem;
@@ -36,25 +37,26 @@ const SubmitBtn = styled.button`
 `
 
 
-const CreateExercise = ({createFunction}) => {
 
+const CreateExercise = ({createFunction}) => {
+    
     const [ExName, setExName] = useState("");
 
     const submitCreateExercise = (e) => {
         e.preventDefault();
 
         // Regex to identify if input has Reps x Sets x Weight , e.g. curls 12 3 15
-        const regex = /([\w ]*) (\d*) (\d*) (\d*)/
+        const regex = /(?<name>[\w ]*) (?<reps>\d*) (?<sets>\d*) (?<weight>\d*)/
         let match = ExName.match(regex);
 
         console.log("match = ", match);
 
         // If Regex match finds Reps, Sets, Weight Data, Create Exercise with first entry to history
-        if(match) {
-            let name = match[1]
-            let reps = match[2]
-            let sets = match[3]
-            let weight = match[4]
+        if(match && match.length === 5) {
+            let name = match.groups.name
+            let reps = match.groups.reps
+            let sets = match.groups.sets
+            let weight = match.groups.weight
 
             createFunction(name, reps, sets, weight);
         } else {
@@ -62,12 +64,15 @@ const CreateExercise = ({createFunction}) => {
             createFunction(ExName)
         }
         
+        // Clear Form input
+        setExName("");
+
     }
 
     return (
         <CreateForm onSubmit={submitCreateExercise} >
             <label htmlFor="create">Create/Add Exercise</label>
-            <CreateInput id="create" autoComplete="off" placeholder="e.g Curls or Curls 12 3 35" required value={ExName} onChange={(e) => setExName(e.target.value)} />
+            <CreateInput id="create" autoComplete="off" placeholder="e.g 'Curls' or 'Curls 12 3 30'" required value={ExName} onChange={(e) => setExName(e.target.value)} />
             <SubmitBtn type="submit" aria-label="Add Exercise">+</SubmitBtn>
         </CreateForm>
     )
