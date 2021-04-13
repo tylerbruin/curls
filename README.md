@@ -1,3 +1,18 @@
+# Curls https://curls.netlify.app/
+
+
+Curls is a mobile react web app utilising LocalStorage to help record and recall your exercise performance.
+
+Build for personal use, with the idea being making recording data as easy as writing on paper with the use of a single text input field. Without the paper component. 
+
+
+Named Curls as its most likely the exercise that is going to be recored the most.
+
+
+----
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
