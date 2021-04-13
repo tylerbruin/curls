@@ -79,7 +79,12 @@ const ExerciseDetails = ({ exercise, addSession, deleteFunc }) => {
 
             // If a Session ID has been found, proceed to prompt user to delete session
             if (targetID) {
-                if(window.confirm(`Delete this session from history?`)) {
+
+                // Get Session Info to add to prompt
+                let sessionText = targetEl.closest('[data-id]').innerText || targetEl.innerText;
+                sessionText = sessionText.replaceAll("\n", " ");
+
+                if(window.confirm(`Delete this session from history? \n ${sessionText}`)) {
                     let type = "session";
                     deleteFunc(type, exercise.id, targetID)
                 }
@@ -89,10 +94,6 @@ const ExerciseDetails = ({ exercise, addSession, deleteFunc }) => {
         ref: dbClickRef,
         latency: 225
     });
-
-    // const clickHandler = (id) => {
-    //     console.log("I have been clicked", id);
-    // }
 
     return (
         <>

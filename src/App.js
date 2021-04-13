@@ -143,7 +143,23 @@ function App() {
 
 		} else if (type === "all") {
 			console.log("Delete All");
-			setExerciseData([]);
+			
+			
+			/*
+			? 	I'm unsure exactly why this works, but assuming something along the lines of assigned State to a variable
+			?	is mutating the ExerciseData variable despite intending to clone it, and therefore when using setState it updates
+			?	The State variable with the mutated variable. ?.?
+
+			?  setExerciseData([]); should be the intended code, however does not clear State as intended
+			
+			? */
+
+			let newState = ExerciseData;
+			newState = newState.length = 0;
+
+			setExerciseData(prevState => {
+				return [...prevState]
+			})
 		}
 		
 		// If a type was provided, assume action has taken and save state.
@@ -174,20 +190,28 @@ function App() {
 		saveState()
 	}
 
+	// Set Viewport to browser height excluding Address Bars & UI
+	const controlViewPort = () => {
+		let vh = window.innerHeight * 0.01;
+		document.documentElement.style.setProperty('--vh', `${vh}px`);
+	}
 
-	useEffect(() => {
+	useEffect(() => {	
+		controlViewPort()
 		// Load State from localStorage on application load
 		loadState();
+
 	}, []);
+
 
 
 	return (
 		<>
 			<Router>
-				<Header />
+				<Header deleteFunc={deleteEntry} />
 				<main>
-						<ExercisesList exercises={ExerciseData} addSession={addSession} deleteFunc={deleteEntry} />
-						<CreateExercise createFunction={createExercise} />
+					<ExercisesList exercises={ExerciseData} addSession={addSession} deleteFunc={deleteEntry} />
+					<CreateExercise createFunction={createExercise} />
 				</main>
 				{/* <Footer /> */}
 			</Router>

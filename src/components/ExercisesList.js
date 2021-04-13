@@ -4,7 +4,7 @@ import Exercise from './Exercise'
 const ListWrapper = styled.div`
     position: relative;
     overflow: hidden;
-    height: 70vh;
+    height: 85%;
 
     &:after {
         content: "";
@@ -19,8 +19,9 @@ const ListWrapper = styled.div`
 
 const List = styled.ul`
     list-style-type: none;
-    height: 100%;
-    // overflow-y: scroll;
+    // height: 100%;
+    height: calc(var(--vh, 1vh) * 80);
+    overflow: auto;
     padding: 1rem .45rem;
 `
 
@@ -53,7 +54,20 @@ const ListHeader = styled.li`
 const NoResults = styled.li`
     text-align: center;
     padding: 1rem;
+
+    p {
+        margin-bottom: 2rem;
+    }
 `
+
+const noResultsText = [
+    'No exercise data found.',
+    '* Double tap a exercise or session to delete.',
+    '* To add a exercise or session, use the text box below',
+    '* When adding, enter the exercise name or name, reps, sets and weight. e.g "Curls" or "Curls 12 3 24"'
+    ];
+
+                    
 
 const Exercises = ({exercises, addSession, deleteFunc}) => {
 
@@ -67,7 +81,7 @@ const Exercises = ({exercises, addSession, deleteFunc}) => {
                     <span className="sets">Sets</span>
                     <span className="weight">Weight</span>
                 </ListHeader>
-                {exercises.length === 0 && <NoResults><p>No exercise data found</p></NoResults>}
+                {exercises.length === 0 && <NoResults>{noResultsText.map(text => <p>{text}</p>) }</NoResults>}
                 {exercises.map((exercise) => (
                     <Exercise key={exercise.id} exercise={exercise} addSession={addSession} deleteFunc={deleteFunc} />
                 ))}
